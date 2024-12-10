@@ -103,5 +103,97 @@ const filmy = [
 			'Na zámek v podhůří Krkonoš přijíždí jeho nový majitel Štěpán se svojí snoubenkou, krásnou komtesou Blankou, a mladším bratrem Adamem. Cestou kočár nešťastně srazí kolemjdoucí dívku, Adam jí pomůže a ona se do něj zamiluje. Na zámku Adam objeví starou vlašskou knihu, která by měla obsahovat cestu k pokladům. Tajemné značky vlašské knihy však nedokáže vyluštit ani národopisec Jiráček, který v kraji sbírá pověsti a nevychází z údivu nad tím, že zdejší lidé stále věří v Krakonoše. Na zámku se objeví záhadný cizinec a nabídne Štěpánovi, že jej k pokladu za určitých podmínek dovede. Výprava do hor může začít. Naplní se Liduščina láska k Adamovi? Jakou záhadu skrývá starý obraz na zámku Hůrka a co strašlivého se v horách kdysi odehrálo? A kdo je vlastně Krakonoš a jaké je jeho největší tajemství? (csfd.cz, Česká televize)',
 		premiera: '2022-12-24',
 	},
+	{
+		id: 'harry-potter-kamen-mudrcu',
+		nazev: 'Harry Potter a kámen Mudrců',
+		plakat: {
+			url: 'https://static.posters.cz/image/1300/plakaty/harry-potter-kamen-mudrcu-i104639.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'Magický fantasy příběh o chlapci, který zjistí, že je čaroděj.',
+		popis:
+			'Před deseti lety položili čarodějové Brumbál, Hagrid a McGonagallová na práh domu Vernona a Petunie Dursleyových miminko s jizvou na čele.',
+		premiera: '2002-02-14',
+	},
+	{
+		id: 'temny-rytir',
+		nazev: 'Temný rytíř',
+		plakat: {
+			url: 'https://static.posters.cz/image/1300/art-photo/the-dark-knight-trilogy-on-fire-i197743.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'Temný rytíř" je druhý film v trilogii o Batmanovi od režiséra Christophera Nolana.',
+		popis:
+			'Další Batmanovo dobrodružství začíná. Jeho protivníkem je tentokrát záhadný psychopat Joker. Vítanou posilou by se Batmanovi mohl stát nový státní zástupce Harvey Dent, idealistický právník odhodlaný bojovat zejména proti mafiím ovládajícím podsvětí města.',
+		premiera: '2008-08-07',
+	},
+	{
+		id: 'pan-prstenu',
+		nazev: 'Pán prstenů: Návrat krále',
+		plakat: {
+			url: 'https://static.posters.cz/image/1300/plakaty/pan-prstenu-navrat-krale-i104633.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'Návrat krále" je třetí film v epické fantasy trilogii Pán prstenů, režírovaný Peterem Jacksonem a založený na knize J.R.R. Tolkiena.',
+		popis:
+			'Nadchází čas rozhodující bitvy o přežití Středozemě. Putování jednotlivých členů Společenstva prstenu se dostává do poslední a rozhodující fáze.',
+		premiera: '2004-01-15',
+	},
+	{
+		id: 'strazci-galaxie',
+		nazev: 'Strážci galaxie',
+		plakat: {
+			url: 'https://static.posters.cz/image/1300/plakaty/strazci-galaxie-one-sheet-i85524.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'V tomto akcí nabitém, výpravném vesmírném dobrodružství se odvážný dobrodruh Peter Quill stává středem zájmu nájemných zabijáků.',
+		popis:
+			'Aby neúnavnému Ronanovi unikl, je Quill nucen spojit své síly se čtveřicí pozoruhodných hrdinů – Rocketem, po zuby ozbrojeným mývalem, Grootem, humanoidem, který připomíná strom, vražednou a tajemnou Gamorou a pomstychtivým Draxem Ničitelem.',
+		premiera: '2014-07-31',
+	},
 ]
+
+
+const hash = window.location.hash.slice(1);
+
+const vybranyFilm = filmy.find(film => film.id === hash);
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (vybranyFilm) {
+        
+        const detailFilmu = document.querySelector("#detail-filmu");
+
+       
+        const nazev = detailFilmu.querySelector(".card-title");
+        if (nazev) {
+            nazev.textContent = vybranyFilm.nazev;
+        }
+
+        
+        const popis = detailFilmu.querySelector(".card-text-short");
+        if (popis) {
+            popis.textContent = vybranyFilm.ochutnavka; 
+        }
+
+       
+        const dlouhyPopis = detailFilmu.querySelector(".card-text");
+        if (dlouhyPopis) {
+            dlouhyPopis.textContent = vybranyFilm.popis; 
+        }
+
+        
+        const plakat = detailFilmu.querySelector(".img-fluid.rounded-start");
+        if (plakat) {
+            plakat.setAttribute("src", vybranyFilm.plakat.url); 
+            plakat.setAttribute("alt", vybranyFilm.nazev); 
+        }
+    } else {
+        console.error("Film s daným ID nebyl nalezen.");
+    }
+});
+
 

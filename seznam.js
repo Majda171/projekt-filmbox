@@ -158,33 +158,29 @@ const filmy = [
 ]
 
 
-
 const seznamFilmu = document.querySelector('#seznam-filmu');
 
 seznamFilmu.innerHTML = '';
 
+filmy.forEach(film => {
+    const filmCard = `
+      <div class="col">
+        <div class="card">
+          <img
+            src="${film.plakat.url}"
+            width="${film.plakat.sirka}"
+            height="${film.plakat.vyska}"
+            class="card-img-top"
+            alt="plakát"
+          />
+          <div class="card-body">
+            <h5 class="card-title">${film.nazev}</h5>
+            <p class="card-text">${film.ochutnavka}</p>
+            <a href="film.html#${film.id}" class="btn btn-primary">Přehrát</a>
+          </div>
+        </div>
+      </div>
+    `;
 
-filmy.forEach(filmy => {
-
-	const filmCard = `
-	  <div class="col">
-		<div class="card">
-		  <img
-			src="${filmy.plakat.url}"
-			width="${filmy.plakat.sirka}"
-			height="${filmy.plakat.vyska}"
-			class="card-img-top"
-			alt="plakát"
-		  />
-		  <div class="card-body">
-			<h5 class="card-title">${filmy.nazev}</h5>
-			<p class="card-text">${filmy.ochutnavka}</p>
-			<a href="film.html" class="btn btn-primary">Přehrát</a>
-		  </div>
-		</div>
-	  </div>
-	`;
-
-
-	seznamFilmu.innerHTML += filmCard;
+    seznamFilmu.innerHTML += filmCard;
 });
