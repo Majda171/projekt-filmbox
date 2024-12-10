@@ -158,16 +158,14 @@ const filmy = [
 ]
 
 
-const hash = window.location.hash.slice(1);
-
-const vybranyFilm = filmy.find(film => film.id === hash);
-
 document.addEventListener("DOMContentLoaded", () => {
+    const hash = window.location.hash.slice(1);  
+    const vybranyFilm = filmy.find(film => film.id === hash);
+
     if (vybranyFilm) {
-        
         const detailFilmu = document.querySelector("#detail-filmu");
 
-       
+        
         const nazev = detailFilmu.querySelector(".card-title");
         if (nazev) {
             nazev.textContent = vybranyFilm.nazev;
@@ -179,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
             popis.textContent = vybranyFilm.ochutnavka; 
         }
 
-       
+        
         const dlouhyPopis = detailFilmu.querySelector(".card-text");
         if (dlouhyPopis) {
             dlouhyPopis.textContent = vybranyFilm.popis; 
@@ -194,6 +192,41 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         console.error("Film s daným ID nebyl nalezen.");
     }
+
+    const noteForm = document.querySelector("#note-form");
+    if (noteForm) {
+        noteForm.addEventListener("submit", function(event) {
+            event.preventDefault(); 
+            
+            const messageInput = document.querySelector("#message-input");
+            const termsCheckbox = document.querySelector("#terms-checkbox");
+
+            
+            if (!messageInput.value.trim()) {
+                messageInput.classList.add("is-invalid");
+                messageInput.focus();
+                return;
+            } else {
+                messageInput.classList.remove("is-invalid");
+            }
+
+            
+            if (!termsCheckbox.checked) {
+                termsCheckbox.classList.add("is-invalid");
+                termsCheckbox.focus();
+                return;
+            } else {
+                termsCheckbox.classList.remove("is-invalid");
+            }
+
+            
+            const detailFilmu = document.querySelector("#detail-filmu");
+            const noteParagraph = document.createElement("p");
+            noteParagraph.classList.add("card-text");
+            noteParagraph.textContent = messageInput.value;
+
+            
+            noteForm.replaceWith(noteParagraph);
+        });
+    }
 });
-
-
